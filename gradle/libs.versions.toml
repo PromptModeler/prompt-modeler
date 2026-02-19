@@ -9,3 +9,4 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jun
 
 [plugins]
 mavencentral = { id = "com.vanniktech.maven.publish", version.ref = "mavencentral" }
+
