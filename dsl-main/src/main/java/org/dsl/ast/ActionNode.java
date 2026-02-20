@@ -3,6 +3,7 @@ package org.dsl.ast;
 import org.dsl.operator.OperatorType;
 import org.dsl.visitor.Render;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public final class ActionNode implements Node {
 
@@ -10,7 +11,7 @@ public final class ActionNode implements Node {
   private final String action;
   private final OperatorType operator;
 
-  public ActionNode(@NonNull final String modality, @NonNull final String action, @NonNull final OperatorType operator) {
+  public ActionNode(@NonNull final String modality, @NonNull final String action, @Nullable final OperatorType operator) {
     this.modality = modality;
     this.action = action;
     this.operator = operator;
