@@ -11,8 +11,6 @@ public final class ContextBuilder implements ContextStart, ContextEnd {
 
   private final List<ContextNode> contextNodeList = new ArrayList<>();
 
-  private OperatorType operator;
-
   @Override
   public void endContext() {
 
@@ -20,21 +18,35 @@ public final class ContextBuilder implements ContextStart, ContextEnd {
 
   @Override
   public ContextEnd context(@NonNull final String context) {
-    contextNodeList.add(new ContextNode(context, operator));
+    contextNodeList.add(new ContextNode(context, null));
     return this;
   }
 
   @Override
   public ContextStart and() {
+    attachOperatorToPrevious(OperatorType.AND);
     return this;
   }
 
+
   @Override
   public ContextStart or() {
+    attachOperatorToPrevious(OperatorType.OR);
     return this;
   }
 
   public List<ContextNode> build() {
     return Collections.unmodifiableList(contextNodeList);
+  }
+
+  private void attachOperatorToPrevious(@NonNull final OperatorType operator) {
+    if(contextNodeList.isEmpty()) {
+      throw new IllegalArgumentException("Cannot apply operator without preceding context");
+    }
+
+    final int lastIndex = contextNodeList.size() - 1;
+    final ContextNode previous = contextNodeList.get(lastIndex);
+
+    contextNodeList.set(lastIndex, new ContextNode(previous.getContext(), operator));
   }
 }
