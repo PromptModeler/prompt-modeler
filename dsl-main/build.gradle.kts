@@ -1,5 +1,5 @@
 group = "io.github.promptmodeler"
-version = "0.0.2"
+version = "0.0.3"
 description = "Prompt Modeler for Prompt used for AI Bots"
 
 plugins {
